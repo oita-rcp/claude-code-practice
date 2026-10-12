@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>お知らせ一覧｜そらいろ工房（練習用・架空）</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="practice-banner" role="note">このサイトは、e-learning AI講座「Claude Code編」の<strong>練習用</strong>です。掲載内容はすべて架空で、実在の団体・会社・人物とは関係がありません。</div>
+<header class="site-header">
+  <a class="site-name" href="../">そらいろ工房<span>（練習用・架空）</span></a>
+  <nav aria-label="メニュー"><ul><li><a href="../">トップ</a></li><li><a href="../info/">お知らせ</a></li><li><a href="../event/">催し</a></li><li><a href="../form/">お問い合わせ</a></li><li><a href="../vendors/">料金調査の練習</a></li><li><a href="../guide/">このサイトについて</a></li></ul></nav>
+</header>
+<div class="layout">
+<main>
+<h1>お知らせ一覧</h1>
+<p>そらいろ工房からのお知らせです。年度ごとの案内は、<a href="2026/">2026年度の更新情報</a>をご覧ください。</p>
+<form class="search" onsubmit="return false">
+  <label for="q">キーワード検索</label>
+  <input id="q" type="text" name="q">
+  <button type="button" id="filter">絞り込み</button>
+  <span class="meta">（例：申込）</span>
+</form>
+<ul class="news" id="news"><li><a href="01/">施設利用のご案内</a></li><li><a href="02/">申込書の様式</a></li><li><a href="03/">設備点検のお知らせ</a></li><li><a href="04/">秋の公開講座の受付開始</a></li><li><a href="05/">資料室の開室時間の変更</a></li><li><a href="06/">共用プリンターの移設</a></li><li><a href="07/">（掲載を終了したお知らせ）</a></li><li><a href="08/">年末年始の休業について</a></li></ul>
+<p id="count" class="meta"></p>
+
+<h2>施設の利用時間</h2>
+<table>
+  <tr><th>場所</th><th>平日</th><th>土曜</th></tr>
+  <tr><td>研修室（3階）</td><td>9時から17時</td><td>9時から17時</td></tr>
+  <tr><td>資料室（2階）</td><td>9時から16時30分</td><td>10時から15時</td></tr>
+  <tr><td>作業場（1階）</td><td>9時から17時</td><td>利用できません</td></tr>
+</table>
+
+<h2>よくある質問</h2>
+<h3>申込は、いつまでにすればよいですか。</h3>
+<p>利用する月の前月末までにお願いします。</p>
+<h3>申込書は、どこにありますか。</h3>
+<p>お知らせの「申込書の様式」をご覧ください。</p>
+<h3>利用を取りやめるときは、どうすればよいですか。</h3>
+<p>利用する日の3日前までに、施設係へお知らせください。</p>
+<h3>道具は借りられますか。</h3>
+<p>作業場の道具は、その場で使えます。持ち出しはできません。</p>
+<h3>駐車場はありますか。</h3>
+<p>建物の南側に、10台分あります。</p>
+<h3>見学はできますか。</h3>
+<p>催しの案内の「工房見学会」にお申し込みください。</p>
+
+<h2>交通の案内</h2>
+<p>最寄りのバス停「そらいろ工房前」（架空）から、歩いて3分です。</p>
+<p>お車の場合は、建物の南側の駐車場をご利用ください。</p>
+
+<script>
+document.getElementById("filter").addEventListener("click", function () {
+  var q = document.getElementById("q").value.trim();
+  var shown = 0;
+  document.querySelectorAll("#news li").forEach(function (li) {
+    var hit = q === "" || li.textContent.indexOf(q) !== -1;
+    li.style.display = hit ? "" : "none";
+    if (hit) shown++;
+  });
+  document.getElementById("count").textContent = q === "" ? "" : "「" + q + "」を含むお知らせ：" + shown + "件";
+});
+</script>
+</main>
+
+</div>
+<footer>
+  e-learning AI講座「Claude Code編」練習用サイト｜おおいた地域連携プラットフォーム
+</footer>
+</body>
+</html>

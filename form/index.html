@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>お問い合わせ（練習用のフォーム）｜そらいろ工房（練習用・架空）</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="practice-banner" role="note">このサイトは、e-learning AI講座「Claude Code編」の<strong>練習用</strong>です。掲載内容はすべて架空で、実在の団体・会社・人物とは関係がありません。</div>
+<header class="site-header">
+  <a class="site-name" href="../">そらいろ工房<span>（練習用・架空）</span></a>
+  <nav aria-label="メニュー"><ul><li><a href="../">トップ</a></li><li><a href="../info/">お知らせ</a></li><li><a href="../event/">催し</a></li><li><a href="../form/">お問い合わせ</a></li><li><a href="../vendors/">料金調査の練習</a></li><li><a href="../guide/">このサイトについて</a></li></ul></nav>
+</header>
+<div class="layout">
+<main>
+<h1>お問い合わせ（練習用のフォーム）</h1>
+<p class="note">このフォームは練習用です。<strong>入力した内容は、どこにも送信されません</strong>（このページの中だけで処理しています）。実在の人の名前や連絡先は、入力しないでください。</p>
+<form class="form" id="contact" novalidate onsubmit="return false">
+  <div class="field">
+    <label for="company">会社名</label><span class="req">（必須）</span>
+    <input type="text" id="company" name="company" required aria-describedby="err-company">
+    <p class="error" id="err-company" role="alert"></p>
+  </div>
+  <div class="field">
+    <label for="person">担当者名</label><span class="req">（必須）</span>
+    <input type="text" id="person" name="person" required aria-describedby="err-person">
+    <p class="error" id="err-person" role="alert"></p>
+  </div>
+  <div class="field">
+    <label for="mail">メールアドレス</label><span class="req">（必須）</span>
+    <input type="email" id="mail" name="mail" required aria-describedby="err-mail">
+    <p class="error" id="err-mail" role="alert"></p>
+  </div>
+  <div class="field">
+    <label for="kind">お問い合わせの種類</label>
+    <select id="kind" name="kind">
+      <option selected>資料の請求</option>
+      <option>施設の利用</option>
+      <option>催しへの参加</option>
+      <option>その他</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="message">用件</label><span class="opt">（任意・200文字まで）</span>
+    <textarea id="message" name="message" aria-describedby="err-message"></textarea>
+    <p class="error" id="err-message" role="alert"></p>
+  </div>
+  <div class="field">
+    <label class="check"><input type="checkbox" id="news" name="news" checked> お知らせのメールを受け取る</label>
+  </div>
+  <p class="actions"><button type="button" id="send">送信する</button></p>
+</form>
+<div id="result"></div>
+
+<script>
+(function () {
+  function field(id) { return document.getElementById(id); }
+  function setError(id, text) {
+    field("err-" + id).textContent = text;
+    field(id).classList.toggle("invalid", text !== "");
+  }
+  function escapeHtml(s) {
+    return s.replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; });
+  }
+  field("send").addEventListener("click", function () {
+    var ok = true;
+    ["company", "person"].forEach(function (id) {
+      var empty = field(id).value.trim() === "";
+      setError(id, empty ? "入力してください。" : "");
+      if (empty) ok = false;
+    });
+    var mail = field("mail").value.trim();
+    if (mail === "") { setError("mail", "入力してください。"); ok = false; }
+    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)) { setError("mail", "メールアドレスの形式で入力してください（例：name@example.jp）。"); ok = false; }
+    else { setError("mail", ""); }
+    var message = field("message").value;
+    if (message.length > 200) { setError("message", "200文字以内で入力してください（いま " + message.length + " 文字）。"); ok = false; }
+    else { setError("message", ""); }
+    if (!ok) { field("result").innerHTML = ""; return; }
+    var rows = [["会社名", field("company").value], ["担当者名", field("person").value], ["メールアドレス", mail],
+                ["お問い合わせの種類", field("kind").value], ["用件", message === "" ? "（入力なし）" : message],
+                ["お知らせのメール", field("news").checked ? "受け取る" : "受け取らない"]];
+    var table = rows.map(function (r) { return "<tr><th>" + r[0] + "</th><td>" + escapeHtml(r[1]) + "</td></tr>"; }).join("");
+    field("contact").style.display = "none";
+    field("result").innerHTML = '<div class="done"><h2>送信しました（練習用）</h2>' +
+      "<p>これは練習用の表示です。入力した内容は、どこにも送信されていません。</p><table>" + table + "</table>" +
+      '<p><a href="./">フォームに戻る</a></p></div>';
+  });
+})();
+</script>
+</main>
+
+</div>
+<footer>
+  e-learning AI講座「Claude Code編」練習用サイト｜おおいた地域連携プラットフォーム
+</footer>
+</body>
+</html>
