@@ -30,6 +30,7 @@ th { background: #EAF2FA; }
 .news li { border-bottom: 1px solid var(--line); padding: 10px 2px; }
 .search { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 14px 0; }
 .search input { font: inherit; padding: 7px 10px; border: 1px solid #8A99A8; border-radius: 6px; width: 260px; }
+.search .meta { margin: 0; }
 .form .field { margin-top: 16px; }
 .form label { font-weight: 700; }
 .form .req { color: #B3261E; font-size: 14px; margin-left: 4px; }
